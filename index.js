@@ -8,6 +8,7 @@ var parseRedirectUrl = require('./lib/webwx.js').parseRedirectUrl;
 var login = require('./lib/webwx.js').login;
 var getbaseRequest = require('./lib/webwx.js').getbaseRequest;
 var webwxinit = require('./lib/webwx.js').webwxinit;
+var messageQueue = require('./lib/reply/messageQueue.js').messageQueue;
 
 var wechatLogger = require('./lib/logger/logger.js').wechatLogger;
 var generateReply = require('./lib/reply/reply.js').generateReply;
@@ -28,6 +29,7 @@ getUUID
   .then(getbaseRequest)
   .then(webwxinit)
   .then(webwxgetcontact)
+  .then(messageQueue)
   .then(robot(
     [(wxSession)=>o=>true],
     [wechatLogger, generateReply]

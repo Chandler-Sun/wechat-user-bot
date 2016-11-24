@@ -23,6 +23,7 @@
   "homepage": "https://github.com/HalfdogStudio/wechat-user-bot#readme",
   "dependencies": {
     "async": "^2.1.2",
+    "bull": "^1.1.2",
     "crawler": "^0.4.3",
     "ent": "^2.2.0",
     "linkifyjs": "^2.1.3",
