@@ -24,7 +24,7 @@ var cachedWXSession = require('./config/wxSession.cache.json')
 
 var serializeWXSession = function(wxSession) {
   return new Promise((resolve, reject)=>{
-    fs.writeFile('./config/wxSession.cache.json', JSON.stringify(wxSession), (err)=>{
+    fs.writeFile(__dirname+'/config/wxSession.cache.json', JSON.stringify(wxSession), (err)=>{
       if(err) return reject(err)
       resolve(wxSession)
     })
@@ -40,7 +40,7 @@ if(cachedWXSession.BaseRequest){
   ))
   .catch((e)=>{
     console.error(e);
-    fs.writeFileSync('./config/wxSession.cache.json', JSON.stringify({}))
+    fs.writeFileSync(__dirname+'/config/wxSession.cache.json', JSON.stringify({}))
     process.exit(1);
   });
 }else{
@@ -63,7 +63,7 @@ if(cachedWXSession.BaseRequest){
     ))
     .catch((e)=>{
       console.error(e);
-      fs.writeFileSync('./config/wxSession.cache.json', JSON.stringify({}))
+      fs.writeFile(__dirname+'/config/wxSession.cache.json', JSON.stringify({}))
       process.exit(1);
     });
 }
