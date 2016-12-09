@@ -30,6 +30,9 @@ var serializeWXSession = function(wxSession) {
     })
   })
 }
+function resetSessionCache(){
+  //fs.writeFile(__dirname+'/config/wxSession.cache.json', JSON.stringify({}))
+}
 
 if(cachedWXSession.BaseRequest){
   messageQueue(cachedWXSession).then(robot(
@@ -40,7 +43,7 @@ if(cachedWXSession.BaseRequest){
   ))
   .catch((e)=>{
     console.error(e);
-    fs.writeFileSync(__dirname+'/config/wxSession.cache.json', JSON.stringify({}))
+    resetSessionCache()
     process.exit(1);
   });
 }else{
@@ -53,7 +56,7 @@ if(cachedWXSession.BaseRequest){
     .then(getbaseRequest)
     .then(webwxinit)
     .then(webwxgetcontact)
-    .then(serializeWXSession)
+    //.then(serializeWXSession)
     .then(messageQueue)
     .then(robot(
       [(wxSession)=>o=>true],
@@ -63,7 +66,7 @@ if(cachedWXSession.BaseRequest){
     ))
     .catch((e)=>{
       console.error(e);
-      fs.writeFile(__dirname+'/config/wxSession.cache.json', JSON.stringify({}))
+      resetSessionCache()
       process.exit(1);
     });
 }
