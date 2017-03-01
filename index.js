@@ -9,6 +9,7 @@ var login = require('./lib/webwx.js').login;
 var getbaseRequest = require('./lib/webwx.js').getbaseRequest;
 var webwxinit = require('./lib/webwx.js').webwxinit;
 var messageQueue = require('./lib/reply/messageQueue.js').messageQueue;
+var feedbackQueue = require('./lib/reply/messageQueue.js').feedbackQueue;
 var wechatLogger = require('./lib/logger/logger.js').wechatLogger;
 var generateReply = require('./lib/reply/reply.js').generateReply;
 
@@ -35,7 +36,9 @@ function resetSessionCache(){
 }
 
 // if(cachedWXSession.BaseRequest){
-  messageQueue({}).then(robot(
+  messageQueue({})
+  .then(feedbackQueue({}))
+  .then(robot(
     [(wxSession)=>o=>true],
     [wechatLogger, generateReply]
     // [],
