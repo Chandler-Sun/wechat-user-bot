@@ -34,8 +34,8 @@ function resetSessionCache(){
   //fs.writeFile(__dirname+'/config/wxSession.cache.json', JSON.stringify({}))
 }
 
-if(cachedWXSession.BaseRequest){
-  messageQueue(cachedWXSession).then(robot(
+// if(cachedWXSession.BaseRequest){
+  messageQueue({}).then(robot(
     [(wxSession)=>o=>true],
     [wechatLogger, generateReply]
     // [],
@@ -46,30 +46,30 @@ if(cachedWXSession.BaseRequest){
     resetSessionCache()
     process.exit(1);
   });
-}else{
-  getUUID
-    .then(checkAndParseUUID)
-    .then(showQRImage(display))
-    .then(checkLogin)
-    .then(parseRedirectUrl)
-    .then(login)
-    .then(getbaseRequest)
-    .then(webwxinit)
-    .then(webwxgetcontact)
-    //.then(serializeWXSession)
-    .then(messageQueue)
-    .then(robot(
-      [(wxSession)=>o=>true],
-      [wechatLogger, generateReply]
-      // [],
-      // [wechatLogger]
-    ))
-    .catch((e)=>{
-      console.error(e);
-      resetSessionCache()
-      process.exit(1);
-    });
-}
+// }else{
+  // getUUID
+  //   .then(checkAndParseUUID)
+  //   .then(showQRImage(display))
+  //   .then(checkLogin)
+  //   .then(parseRedirectUrl)
+  //   .then(login)
+  //   .then(getbaseRequest)
+  //   .then(webwxinit)
+  //   .then(webwxgetcontact)
+  //   //.then(serializeWXSession)
+  //   .then(messageQueue)
+  //   .then(robot(
+  //     [(wxSession)=>o=>true],
+  //     [wechatLogger, generateReply]
+  //     // [],
+  //     // [wechatLogger]
+  //   ))
+  //   .catch((e)=>{
+  //     console.error(e);
+  //     resetSessionCache()
+  //     process.exit(1);
+  //   });
+// }
 
 
 
